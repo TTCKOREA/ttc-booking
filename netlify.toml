@@ -1,0 +1,32 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Next.js 플러그인
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# iframe 허용 헤더
+[[headers]]
+  for = "/embed/*"
+  [headers.values]
+    X-Frame-Options = "ALLOWALL"
+    Content-Security-Policy = "frame-ancestors *"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/embed"
+  [headers.values]
+    X-Frame-Options = "ALLOWALL"
+    Content-Security-Policy = "frame-ancestors *"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
